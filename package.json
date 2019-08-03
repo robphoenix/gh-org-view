@@ -1,8 +1,12 @@
 {
-  "name": "nothing",
+  "name": "gh-org-view",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "apollo-boost": "^0.4.3",
+    "apollo-react": "^0.7.1",
+    "graphql": "^14.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
