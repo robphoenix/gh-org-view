@@ -58,7 +58,19 @@ const Repos = ({ org }) => {
         </dl>
       )}
       {error && <span>{error.message}</span>}
-      {org && issues.map(issue => <div key={issue.id}>{issue.title}</div>)}
+      {org &&
+        issues.map(issue => (
+          <details key={issue.id}>
+            <summary>{issue.title}</summary>
+            <div>
+              <p>{issue.body}</p>
+              <span>
+                {issue.comments.totalCount || `no`} comment
+                {issue.comments.totalCount !== 1 && `s`}
+              </span>
+            </div>
+          </details>
+        ))}
     </div>
   )
 }
