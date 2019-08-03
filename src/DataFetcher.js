@@ -1,43 +1,36 @@
 // @ts-nocheck
 import React from 'react'
 import { gql } from 'apollo-boost'
+import { useQuery } from '@apollo/react-hooks'
 
-const DataFetcher = ({ client }) => {
-  const [repos, setRepos] = React.useState([])
-
-  const query = gql`
-    query {
-      organization(login: "uw-labs") {
-        repositories(first: 50) {
-          nodes {
-            id
-            url
-            name
-          }
+const GET_UW_LABS_REPOS = gql`
+  query {
+    organization(login: "uw-labs") {
+      repositories(first: 50) {
+        nodes {
+          id
+          url
+          name
         }
       }
     }
-  `
+  }
+`
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await client.query({ query })
-        setRepos(data.organization.repositories.nodes)
-      } catch (error) {
-        console.log({ error })
-      }
-    }
-    fetchData()
-  }, [client, query])
+const DataFetcher = () => {
+  const { loading, data } = useQuery(GET_UW_LABS_REPOS)
 
   return (
     <div>
-      <ul>
-        {repos.map(repo => (
-          <li key={repo.id}>{repo.name}</li>
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {data.organization.repositories.nodes.map(repo => (
+            <li key={repo.id}>{repo.name}</li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
