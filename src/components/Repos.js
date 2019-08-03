@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useApolloClient } from '@apollo/react-hooks'
 
 import { GET_ORG_REPOS } from '../utils/queries'
 import Repo from './Repo'
@@ -13,6 +13,8 @@ const Repos = ({ org }) => {
       name: org
     }
   })
+  const client = useApolloClient()
+  console.log({ client })
 
   React.useEffect(() => {
     // clear the current issues when the org changes

@@ -7,11 +7,15 @@ const RepoForm = ({ onSubmit }) => {
     if (!values.name) {
       errors.name = `You must enter an organization name.`
     }
+    if (!values.token) {
+      errors.name = `You must enter a Personal Access token.`
+    }
     return errors
   }
 
   const initialValues = {
-    name: ``
+    name: ``,
+    token: `${process.env.REACT_APP_GITHUB_TOKEN}` || ``
   }
 
   const { handleSubmit, getInputFieldProps, touched, errors } = useForm({
@@ -19,8 +23,15 @@ const RepoForm = ({ onSubmit }) => {
     onSubmit,
     validate
   })
+
   return (
     <form onSubmit={handleSubmit}>
+      <label>
+        Personal Access Token:
+        <input type="password" autoFocus {...getInputFieldProps(`token`)} />
+        {touched.token && errors.token && <small>{errors.token}</small>}
+      </label>
+
       <label>
         Organization:
         <input type="text" autoFocus {...getInputFieldProps(`name`)} />
