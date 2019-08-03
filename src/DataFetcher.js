@@ -17,14 +17,12 @@ const GET_UW_LABS_REPOS = gql`
   }
 `
 
-const DataFetcher = () => {
+const Repos = () => {
   const { loading, data } = useQuery(GET_UW_LABS_REPOS)
 
   return (
     <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      {!loading && (
         <ul>
           {data.organization.repositories.nodes.map(repo => (
             <li key={repo.id}>{repo.name}</li>
@@ -35,4 +33,4 @@ const DataFetcher = () => {
   )
 }
 
-export default DataFetcher
+export default Repos

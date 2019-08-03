@@ -1,10 +1,16 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 
-import DataFetcher from './DataFetcher'
+import React from 'react'
+
+const Repos = React.lazy(() => import('./DataFetcher'))
 
 function App() {
-  return <DataFetcher />
+  return (
+    <React.Suspense fallback={<span>Repos loading...</span>}>
+      <Repos />
+    </React.Suspense>
+  )
 }
 
 export default App
