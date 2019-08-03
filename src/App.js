@@ -7,7 +7,7 @@ import DataFetcher from './DataFetcher'
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
   headers: {
-    Authorization: `Bearer xxx`
+    Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
   }
 })
 
