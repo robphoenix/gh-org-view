@@ -25,7 +25,7 @@ function App() {
     return errors
   }
 
-  const { handleSubmit, getInputFieldProps } = useForm({
+  const { handleSubmit, getInputFieldProps, touched, errors } = useForm({
     initialValues,
     onSubmit,
     validate
@@ -37,8 +37,9 @@ function App() {
         <label>
           Organization:
           <input type="text" autoFocus {...getInputFieldProps(`name`)} />
+          {touched.name && errors.name && <small>{errors.name}</small>}
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Search" />
       </form>
       <React.Suspense fallback={<Loading name={`Repos`} />}>
         {org && <Repos org={org} />}

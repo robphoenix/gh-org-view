@@ -29,6 +29,7 @@ const formReducer = (state, action) => {
 }
 
 const useForm = props => {
+  const { validate } = props
   if (!props.onSubmit) {
     throw new Error(`You forgot to pass onSubmit to useForm!`)
   }
@@ -38,6 +39,13 @@ const useForm = props => {
     errors: {},
     touched: {}
   })
+
+  React.useEffect(() => {
+    if (validate) {
+      const errors = validate(state.values)
+      dispatch({ type: `SET_ERRORS`, payload: errors })
+    }
+  }, [state.values, validate])
 
   const handleInputChange = fieldName => event => {
     event.persist()
