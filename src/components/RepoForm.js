@@ -1,21 +1,24 @@
 import React from 'react'
 import useForm from '../hooks/useForm'
+import useStoredToken from '../hooks/useStoredToken'
 
 const RepoForm = ({ onSubmit }) => {
+  const { getStoredToken } = useStoredToken()
+
   const validate = values => {
     let errors = {}
     if (!values.name) {
       errors.name = `You must enter an organization name.`
     }
     if (!values.token) {
-      errors.name = `You must enter a Personal Access token.`
+      errors.token = `You must enter a Personal Access token.`
     }
     return errors
   }
 
   const initialValues = {
     name: ``,
-    token: `${process.env.REACT_APP_GITHUB_TOKEN}` || ``
+    token: getStoredToken()
   }
 
   const { handleSubmit, getInputFieldProps, touched, errors } = useForm({
@@ -26,17 +29,19 @@ const RepoForm = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Personal Access Token:
-        <input type="password" autoFocus {...getInputFieldProps(`token`)} />
-        {touched.token && errors.token && <small>{errors.token}</small>}
-      </label>
+      <label htmlFor="token">Personal Access Token:</label>
+      <input
+        id="token"
+        type="password"
+        autoFocus
+        {...getInputFieldProps(`token`)}
+      />
+      {touched.token && errors.token && <small>{errors.token}</small>}
 
-      <label>
-        Organization:
-        <input type="text" autoFocus {...getInputFieldProps(`name`)} />
-        {touched.name && errors.name && <small>{errors.name}</small>}
-      </label>
+      <label htmlFor="name">Organization:</label>
+      <input id="name" type="text" {...getInputFieldProps(`name`)} />
+      {touched.name && errors.name && <small>{errors.name}</small>}
+
       <input type="submit" value="Search" />
     </form>
   )

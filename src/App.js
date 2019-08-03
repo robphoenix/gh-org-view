@@ -4,16 +4,19 @@ import Loading from './components/Loading'
 import RepoForm from './components/RepoForm'
 import AppProviders from './context'
 import apolloClient from './utils/client'
+import useStoredToken from './hooks/useStoredToken'
 
 const Repos = React.lazy(() => import('./components/Repos'))
 
 function App() {
   const [org, setOrg] = React.useState(``)
   const [token, setToken] = React.useState(``)
+  const { setStoredToken } = useStoredToken()
 
   const onSubmit = values => {
     setOrg(values.name)
     setToken(values.token)
+    setStoredToken(values.token)
   }
 
   const client = apolloClient(token)
