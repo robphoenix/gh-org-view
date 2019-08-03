@@ -24,7 +24,6 @@ const DataFetcher = ({ client }) => {
       try {
         const { data } = await client.query({ query })
         setRepos(data.organization.repositories.nodes)
-        console.log({ data })
       } catch (error) {
         console.log({ error })
       }
