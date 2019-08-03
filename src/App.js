@@ -4,43 +4,18 @@ import { jsx } from '@emotion/core'
 import React from 'react'
 
 import Loading from './components/Loading'
-import useForm from './hooks/useForm'
+import RepoForm from './components/RepoForm'
 
 const Repos = React.lazy(() => import('./components/Repos'))
 
 function App() {
   const [org, setOrg] = React.useState(``)
 
-  const initialValues = {
-    name: ``
-  }
-
   const onSubmit = values => setOrg(values.name)
-
-  const validate = values => {
-    let errors = {}
-    if (!values.name) {
-      errors.name = `You must enter an organization name.`
-    }
-    return errors
-  }
-
-  const { handleSubmit, getInputFieldProps, touched, errors } = useForm({
-    initialValues,
-    onSubmit,
-    validate
-  })
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Organization:
-          <input type="text" autoFocus {...getInputFieldProps(`name`)} />
-          {touched.name && errors.name && <small>{errors.name}</small>}
-        </label>
-        <input type="submit" value="Search" />
-      </form>
+      <RepoForm onSubmit={onSubmit} />
       <React.Suspense fallback={<Loading name={`Repos`} />}>
         {org && <Repos org={org} />}
       </React.Suspense>
