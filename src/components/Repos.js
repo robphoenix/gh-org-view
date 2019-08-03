@@ -17,7 +17,8 @@ const Repos = ({ org }) => {
   React.useEffect(() => {
     // clear the current issues when the org changes
     updateIssues([])
-  }, [org, updateIssues])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [org])
 
   return (
     <div>

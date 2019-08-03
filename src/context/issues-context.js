@@ -14,7 +14,9 @@ const IssuesProvider = props => {
   const [issues, setIssues] = React.useState([])
 
   const getIssues = () => issues
-  const updateIssues = issues => setIssues(issues)
+  const updateIssues = issues => {
+    setIssues(issues)
+  }
 
   return (
     <IssuesContext.Provider value={{ getIssues, updateIssues }} {...props} />
