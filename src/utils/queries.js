@@ -13,6 +13,22 @@ const GET_UW_LABS_REPOS = gql`
             color
             name
           }
+          issues(first: 20) {
+            totalCount
+            nodes {
+              id
+              title
+              body
+              createdAt
+              comments {
+                totalCount
+              }
+              author {
+                login
+                url
+              }
+            }
+          }
         }
       }
     }
