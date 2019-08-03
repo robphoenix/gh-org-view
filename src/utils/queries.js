@@ -8,6 +8,11 @@ const GET_UW_LABS_REPOS = gql`
           id
           url
           name
+          description
+          primaryLanguage {
+            color
+            name
+          }
         }
       }
     }
