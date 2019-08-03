@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost'
 
-const GET_UW_LABS_REPOS = gql`
+const GET_ORG_REPOS = gql`
   query($name: String!) {
     organization(login: $name) {
       repositories(first: 50) {
@@ -35,4 +35,4 @@ const GET_UW_LABS_REPOS = gql`
   }
 `
 
-export { GET_UW_LABS_REPOS }
+export { GET_ORG_REPOS }
