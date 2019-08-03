@@ -3,7 +3,7 @@ import React from 'react'
 import PrimaryLanguage from './PrimaryLanguage'
 import RepoIssues from './RepoIssues'
 
-const Repo = ({ repo, handleClick }) => {
+const Repo = ({ repo }) => {
   return (
     <div>
       <dt>
@@ -16,7 +16,7 @@ const Repo = ({ repo, handleClick }) => {
             <PrimaryLanguage lang={repo.primaryLanguage} />
           )}
           {repo.issues && !!repo.issues.nodes.length && (
-            <RepoIssues issues={repo.issues} handleClick={handleClick} />
+            <RepoIssues issues={repo.issues} />
           )}
         </div>
       </dd>
