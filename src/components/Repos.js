@@ -1,34 +1,25 @@
-// @ts-nocheck
 import React from 'react'
-import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 
-const GET_UW_LABS_REPOS = gql`
-  query {
-    organization(login: "uw-labs") {
-      repositories(first: 50) {
-        nodes {
-          id
-          url
-          name
-        }
-      }
-    }
-  }
-`
+import { GET_UW_LABS_REPOS } from '../utils/queries'
 
-const Repos = () => {
-  const { loading, data } = useQuery(GET_UW_LABS_REPOS)
+const Repos = ({ org }) => {
+  const { loading, data, error } = useQuery(GET_UW_LABS_REPOS, {
+    variables: {
+      name: org
+    }
+  })
 
   return (
     <div>
-      {!loading && (
+      {!error && !loading && (
         <ul>
           {data.organization.repositories.nodes.map(repo => (
             <li key={repo.id}>{repo.name}</li>
           ))}
         </ul>
       )}
+      {error && <span>{error.message}</span>}
     </div>
   )
 }
