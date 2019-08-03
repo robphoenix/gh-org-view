@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core'
 
 import React from 'react'
 
-const Repos = React.lazy(() => import('./DataFetcher'))
+const Repos = React.lazy(() => import('./components/Repos'))
 
 function App() {
   return (
