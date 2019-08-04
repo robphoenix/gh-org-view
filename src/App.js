@@ -40,6 +40,7 @@ function App() {
               box-sizing: border-box;
               background-color: ${theme.colors.background};
               color: ${theme.colors.text};
+              font-family: ${theme.fonts.body};
             }
             *,
             *::before,
@@ -53,7 +54,13 @@ function App() {
         <Heading />
         <RepoForm onSubmit={onSubmit} />
         <AppProviders client={client}>
-          <React.Suspense fallback={<Loading name={`Repos`} />}>
+          <React.Suspense
+            fallback={
+              <div sx={{ padding: 4 }}>
+                <Loading name="repos" />
+              </div>
+            }
+          >
             {org && <Repos org={org} />}
           </React.Suspense>
         </AppProviders>

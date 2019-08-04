@@ -7,17 +7,21 @@ const Heading = () => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        padding: 4
+        padding: 4,
+        marginBottom: 3
       }}
     >
       <h1
         sx={{
           paddingBottom: 2,
           borderBottom: '2px solid',
-          borderColor: 'primary'
+          borderColor: 'primary',
+          fontFamily: 'monospace',
+          fontSize: 5,
+          textTransform: 'capitalize'
         }}
       >
-        Github Org View
+        github org view
       </h1>
     </div>
   )

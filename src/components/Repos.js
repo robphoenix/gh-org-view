@@ -9,14 +9,16 @@ import Repo from './Repo'
 import Issue from './Issue'
 import { useIssues } from '../context/issues-context'
 import ErrorMessage from './ErrorMessage'
+import Loading from './Loading'
 
 const Repos = ({ org }) => {
-  const { getIssues, updateIssues } = useIssues()
   const { loading, data, error } = useQuery(GET_ORG_REPOS, {
     variables: {
       name: org
     }
   })
+
+  const { getIssues, updateIssues } = useIssues()
 
   React.useEffect(() => {
     // clear the current issues when the org changes
@@ -86,6 +88,7 @@ const Repos = ({ org }) => {
           </div>
         </div>
       )}
+      {loading && <Loading name="repos" />}
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </div>
   )
