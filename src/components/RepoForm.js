@@ -136,6 +136,7 @@ const RepoForm = ({ onSubmit }) => {
           }}
         >
           <button
+            type="button"
             onClick={() => {
               setColorMode(colorMode === 'light' ? 'dark' : 'light')
             }}
