@@ -1,3 +1,6 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
+
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
@@ -5,6 +8,7 @@ import { GET_ORG_REPOS } from '../utils/queries'
 import Repo from './Repo'
 import Issue from './Issue'
 import { useIssues } from '../context/issues-context'
+import ErrorMessage from './ErrorMessage'
 
 const Repos = ({ org }) => {
   const { getIssues, updateIssues } = useIssues()
@@ -21,16 +25,68 @@ const Repos = ({ org }) => {
   }, [org])
 
   return (
-    <div>
+    <div
+      sx={{
+        padding: 4,
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
       {!error && !loading && (
-        <dl>
-          {data.organization.repositories.nodes.map(repo => (
-            <Repo key={repo.id} repo={repo} />
-          ))}
-        </dl>
+        <div
+          sx={{
+            flex: 1,
+            padding: 2,
+            marginRight: 3
+          }}
+        >
+          <h2
+            sx={{
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              paddingBottom: 2,
+              marginBottom: 2,
+              borderBottom: '2px solid',
+              borderColor: 'primary'
+            }}
+          >
+            repositories
+          </h2>
+          <dl>
+            {data.organization.repositories.nodes.map(repo => (
+              <Repo key={repo.id} repo={repo} />
+            ))}
+          </dl>
+        </div>
       )}
-      {error && <span>{error.message}</span>}
-      {org && getIssues().map(issue => <Issue key={issue.id} issue={issue} />)}
+      {org && !error && !loading && (
+        <div
+          sx={{
+            flex: 1,
+            padding: 2,
+            marginLeft: 3
+          }}
+        >
+          <h2
+            sx={{
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              paddingBottom: 2,
+              marginBottom: 2,
+              borderBottom: '2px solid',
+              borderColor: 'primary'
+            }}
+          >
+            issues
+          </h2>
+          <div>
+            {getIssues().map(issue => (
+              <Issue key={issue.id} issue={issue} />
+            ))}
+          </div>
+        </div>
+      )}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </div>
   )
 }

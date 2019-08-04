@@ -1,10 +1,17 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
+
 import React from 'react'
+import { ThemeProvider } from 'theme-ui'
+import { Global, css } from '@emotion/core'
 
 import Loading from './components/Loading'
 import RepoForm from './components/RepoForm'
 import AppProviders from './context'
 import apolloClient from './utils/client'
 import useStoredToken from './hooks/useStoredToken'
+import theme from './theme'
+import Heading from './components/Heading'
 
 const Repos = React.lazy(() => import('./components/Repos'))
 
@@ -23,13 +30,34 @@ function App() {
 
   return (
     <div>
-      <h1>Github Org View</h1>
-      <RepoForm onSubmit={onSubmit} />
-      <AppProviders client={client}>
-        <React.Suspense fallback={<Loading name={`Repos`} />}>
-          {org && <Repos org={org} />}
-        </React.Suspense>
-      </AppProviders>
+      <ThemeProvider theme={theme}>
+        <Global
+          styles={css`
+            html,
+            body {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              background-color: ${theme.colors.background};
+              color: ${theme.colors.text};
+            }
+            *,
+            *::before,
+            *::after {
+              box-sizing: inherit;
+              margin: 0;
+              padding: 0;
+            }
+          `}
+        />
+        <Heading />
+        <RepoForm onSubmit={onSubmit} />
+        <AppProviders client={client}>
+          <React.Suspense fallback={<Loading name={`Repos`} />}>
+            {org && <Repos org={org} />}
+          </React.Suspense>
+        </AppProviders>
+      </ThemeProvider>
     </div>
   )
 }

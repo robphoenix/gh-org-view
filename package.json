@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^0.1.0-beta.11",
     "@emotion/core": "^10.0.14",
+    "@mdx-js/react": "^1.1.5",
     "apollo-boost": "^0.4.3",
     "graphql": "^14.4.2",
     "react": "^16.8.6",

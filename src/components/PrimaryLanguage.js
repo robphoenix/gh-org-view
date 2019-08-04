@@ -1,15 +1,20 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from 'theme-ui'
 
 const PrimaryLanguage = ({ lang }) => {
   return (
-    <span
-      css={{
-        backgroundColor: lang.color
+    <small
+      sx={{
+        backgroundColor: lang.color,
+        border: '1px solid',
+        borderColor: lang.color,
+        borderRadius: '2px',
+        paddingX: 2,
+        paddingY: 1
       }}
     >
       {lang.name}
-    </span>
+    </small>
   )
 }
 
