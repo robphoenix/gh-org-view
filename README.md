@@ -5,18 +5,8 @@ issues for now, but on the roadmap are PRs, licence, Code of Conduct etc.
 
 ## React's richer features
 
-- [Suspense][suspense] & [Lazy][lazy] 
-- [Context][context] 
-- [Apollo React hooks][apollo-hooks], with [context][apollo-context]
-- Form handling, validation & state managment with a custom hook & [useReducer][reducer]
-- Theming with [design tokens][tokens] & [CSS-in-JS][css]
-
-
-- [suspense](https://github.com/robphoenix/gh-org-view/blob/master/src/App.js#L56)
-- [lazy](https://github.com/robphoenix/gh-org-view/blob/master/src/App.js#L16)
-- [context](src/context/issues-context.js)
-- [apollo-hooks](https://github.com/robphoenix/gh-org-view/blob/master/src/components/Repos.js#L15)
-- [apollo-context](https://github.com/robphoenix/gh-org-view/blob/master/src/context/index.js#L8)
-- [reducer](src/hooks/useForm.js)
-- [css](https://github.com/robphoenix/gh-org-view/blob/master/src/components/Heading.js#L17)
-- [tokens](src/theme.js)
+- [Suspense](https://github.com/robphoenix/gh-org-view/blob/master/src/App.js#L56) & [Lazy](https://github.com/robphoenix/gh-org-view/blob/master/src/App.js#L16) 
+- [Context](src/context/issues-context.js) 
+- [Apollo React hooks](https://github.com/robphoenix/gh-org-view/blob/master/src/components/Repos.js#L15), with [context](https://github.com/robphoenix/gh-org-view/blob/master/src/context/index.js#L8)
+- Form handling, validation & state managment with a custom hook & [useReducer](src/hooks/useForm.js)
+- Theming with [design tokens](src/theme.js) & [CSS-in-JS](https://github.com/robphoenix/gh-org-view/blob/master/src/components/Heading.js#L17)
