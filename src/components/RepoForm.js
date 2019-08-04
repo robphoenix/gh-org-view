@@ -1,10 +1,11 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useColorMode } from 'theme-ui'
 
 import useForm from '../hooks/useForm'
 import useStoredToken from '../hooks/useStoredToken'
 
 const RepoForm = ({ onSubmit }) => {
+  const [colorMode, setColorMode] = useColorMode()
   const { getStoredToken } = useStoredToken()
 
   const validate = values => {
@@ -48,7 +49,7 @@ const RepoForm = ({ onSubmit }) => {
         <div
           sx={{
             display: 'flex',
-            marginBottom: 3
+            marginBottom: 4
           }}
         >
           <div
@@ -56,7 +57,7 @@ const RepoForm = ({ onSubmit }) => {
               display: 'flex',
               flexDirection: 'column',
               flex: 1,
-              marginRight: 4
+              marginRight: 2
             }}
           >
             <label
@@ -134,6 +135,26 @@ const RepoForm = ({ onSubmit }) => {
             justifyContent: 'flex-end'
           }}
         >
+          <button
+            onClick={() => {
+              setColorMode(colorMode === 'light' ? 'dark' : 'light')
+            }}
+            sx={{
+              paddingX: 3,
+              paddingY: 2,
+              border: '1px solid',
+              borderColor: 'text',
+              letterSpacing: '0.1em',
+              borderRadius: '2px',
+              textTransform: 'uppercase',
+              backgroundColor: 'text',
+              color: 'background',
+              cursor: 'pointer',
+              marginRight: 2
+            }}
+          >
+            Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+          </button>
           <input
             type="submit"
             value="search"

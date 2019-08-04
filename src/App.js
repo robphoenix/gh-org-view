@@ -2,7 +2,7 @@
 import { jsx } from 'theme-ui'
 
 import React from 'react'
-import { ThemeProvider } from 'theme-ui'
+import { ThemeProvider, ColorMode } from 'theme-ui'
 import { Global, css } from '@emotion/core'
 
 import Loading from './components/Loading'
@@ -31,6 +31,7 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
+        <ColorMode />
         <Global
           styles={css`
             html,
@@ -38,8 +39,6 @@ function App() {
               margin: 0;
               padding: 0;
               box-sizing: border-box;
-              background-color: ${theme.colors.background};
-              color: ${theme.colors.text};
               font-family: ${theme.fonts.body};
             }
             *,
@@ -51,19 +50,27 @@ function App() {
             }
           `}
         />
-        <Heading />
-        <RepoForm onSubmit={onSubmit} />
-        <AppProviders client={client}>
-          <React.Suspense
-            fallback={
-              <div sx={{ padding: 4 }}>
-                <Loading name="repos" />
-              </div>
-            }
-          >
-            {org && <Repos org={org} />}
-          </React.Suspense>
-        </AppProviders>
+        <div
+          sx={{
+            color: 'text',
+            backgroundColor: 'background'
+          }}
+        >
+          <Heading />
+
+          <RepoForm onSubmit={onSubmit} />
+          <AppProviders client={client}>
+            <React.Suspense
+              fallback={
+                <div sx={{ padding: 4 }}>
+                  <Loading name="repos" />
+                </div>
+              }
+            >
+              {org && <Repos org={org} />}
+            </React.Suspense>
+          </AppProviders>
+        </div>
       </ThemeProvider>
     </div>
   )
